@@ -1,0 +1,96 @@
+PS C:\Users\sande\Desktop\GenAI-Resume Analyzer\server> node .\ai.service.js
+{
+  matchScore: 88,
+  technicalQuestions: [
+    {
+      question: 'Can you explain the event loop in Node.js and how asynchronous operations are handled?',
+      intention: "To test the candidate's core understanding of Node.js internals beyond just basic API creation.",
+      answer: 'Explain the call stack, node APIs, callback queue, and the event loop phases (timers, poll, check, etc.). Mention how non-blocking I/O works in JavaScript.'
+    },
+    {
+      question: 'How do you handle state management and performance optimization in React applications?',
+      intention: 'To assess frontend proficiency, component reusability, and optimization techniques like memoization.',
+      answer: 'Discuss React hooks (useState, useEffect, useMemo, useCallback), component structuring, lazy loading, and avoiding unnecessary re-renders.'
+    },
+    {
+      question: 'How do you secure REST APIs built with Express.js and implement JWT authentication?',
+      intention: 'To evaluate security best practices regarding authentication, authorization, and data validation.',
+      answer: 'Explain token generation using jsonwebtoken, storing secrets in environment variables, protecting routes via middleware, hashing passwords with bcrypt, and handling token expiration.'
+    },
+    {
+      question: 'How do you structure schemas in MongoDB for a complex relational-like dataset using Mongoose?',
+      intention: 'To check database design skills and understanding of NoSQL trade-offs like referencing vs embedding.',
+      answer: 'Discuss schema design, using ObjectId references, population, indexing for query performance, and when to embed versus reference documents.'
+    }
+  ],
+  behaviouralQuestions: [
+    {
+      question: 'Tell me about a time when you had to integrate a complex third-party API, like an LLM API, into your application. How did you approach it?',
+      intention: 'To evaluate problem-solving capabilities, adaptability, and how the candidate handles external dependencies.',
+      answer: 'Use the STAR method. Describe the API integration challenge, your approach to reading documentation, handling rate limits or errors, and the final outcome of the project.'
+    },
+    {
+      question: 'How do you keep yourself updated with rapidly changing technologies like AI and Full Stack frameworks?',
+      intention: "To understand the candidate's learning agility and passion for continuous improvement.",
+      answer: 'Talk about building side projects to learn new tools, reading documentation, following tech communities, and experimentingwith new tech stacks like Generative AI.'
+    },
+    {
+      question: 'Describe a situation where you had to debug a difficult performance issue in an application.',
+      intention: 'To gauge analytical skills and debugging methodology.',
+      answer: 'Mention using browser developer tools, Postman, or console logs, identifying the root cause (such as an unoptimized database query or React re-render), and implementing a fix.'
+    }
+  ],
+  skillGaps: [
+    { skills: 'TypeScript', severity: 'medium' },
+    { skills: 'Docker', severity: 'low' },
+    { skills: 'Cloud Deployment (AWS/GCP/Heroku)', severity: 'medium' }
+  ],
+  prepairationPlan: [
+    {
+      day: 1,
+      focus: 'Advanced JavaScript & Node.js Internals',
+      tasks: [
+        'Revise asynchronous JavaScript (Promises, async/await)',
+        'Understand Node.js event loop and streams',
+        'Review Express.js middleware pattern and error handling'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'React.js Optimization & State Management',
+      tasks: [
+        'Practice hooks like useMemo, useCallback, and custom hooks',
+        'Review component lifecycles and performance optimization',
+        'Build a small mock component tree focused on clean props drilling and state'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Database Design & Security',
+      tasks: [
+        'Revise MongoDB indexing and aggregation pipelines',
+        'Review JWT authentication flow and security best practices (CORS, Helmet)',
+        'Practice writing clean REST API controllers with Mongoose'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'Nice-to-Haves: TypeScript & Docker Basics',
+      tasks: [
+        'Learn basic TypeScript syntax, interfaces, and types for Node/React',
+        'Understand containerization concepts and write a simple Dockerfile for a Node app',
+        'Review cloud deployment workflows'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Mock Interview & Project Review',
+      tasks: [
+        'Prepare explanations for AI-Powered Developer Assistant and PixaraAI projects',
+        'Practice answering common behavioral questions using the STAR method',
+        'Review system design basics for scalable MERN applications'
+      ]
+    }
+  ]
+}
+PS C:\Users\sande\Desktop\GenAI-Resume Analyzer\server> 
