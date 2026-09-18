@@ -366,7 +366,7 @@ const Profile = () => {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="e.g. Alex Johnson"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15"
+                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
                         />
                       </div>
                     </div>
@@ -450,7 +450,7 @@ const Profile = () => {
                           value={formData.city}
                           onChange={handleChange}
                           placeholder="e.g. San Francisco"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15"
+                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
                         />
                       </div>
                     </div>
@@ -468,7 +468,7 @@ const Profile = () => {
                           value={formData.state}
                           onChange={handleChange}
                           placeholder="e.g. California"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15"
+                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
                         />
                       </div>
                     </div>
@@ -518,7 +518,7 @@ const Profile = () => {
                     <button
                       type="submit"
                       disabled={isSaving}
-                      className="cursor-pointer flex items-center gap-2 rounded-2xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-emerald-600/30 disabled:cursor-not-allowed disabled:opacity-70"
+                      className="cursor-pointer flex items-center gap-2 rounded-2xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-emerald-600/30 disabled:opacity-70"
                     >
                       {isSaving ? (
                         <>

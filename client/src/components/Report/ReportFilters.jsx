@@ -19,7 +19,7 @@ const ReportFilters = ({
           placeholder="Search by job title or description..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-2xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-xs font-medium text-gray-900 shadow-xs outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15"
+          className="w-full rounded-2xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-xs font-medium text-gray-900 shadow-xs outline-none transition focus:ring-2 focus:ring-emerald-500/15"
         />
       </div>
 

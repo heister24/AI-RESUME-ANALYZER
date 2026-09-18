@@ -1,6 +1,10 @@
 import { ArrowLeft, Award, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getJobTitle, getScoreBadgeClass, formatReportDate } from "./reportUtils";
+import {
+  getJobTitle,
+  getScoreBadgeClass,
+  formatReportDate,
+} from "./reportUtils";
 
 const ReportDetailHeader = ({
   selectedReport,
@@ -38,7 +42,7 @@ const ReportDetailHeader = ({
                   const target = reports.find((r) => r._id === e.target.value);
                   if (target) onSelectReport(target);
                 }}
-                className="cursor-pointer rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-xs outline-none focus:border-emerald-500"
+                className="cursor-pointer rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-xs outline-none"
               >
                 {reports.map((r) => (
                   <option key={r._id} value={r._id}>
@@ -71,18 +75,22 @@ const ReportDetailHeader = ({
             <h1 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
               {title}
             </h1>
-            <p className="mt-2 text-xs text-gray-500">Generated on {dateFormatted}</p>
+            <p className="mt-2 text-xs text-gray-500">
+              Generated on {dateFormatted}
+            </p>
           </div>
 
           {/* Score Gauge Widget */}
           <div className="flex shrink-0 items-center gap-5 rounded-2xl bg-white/90 p-5 shadow-sm border border-gray-200/70">
             <div className="flex flex-col text-right">
-              <span className="text-sm font-bold text-gray-900">Overall Match</span>
+              <span className="text-sm font-bold text-gray-900">
+                Overall Match
+              </span>
               <span className="text-xs text-gray-500">Role Compatibility</span>
             </div>
             <div
               className={`flex h-16 w-16 items-center justify-center rounded-full border-4 shadow-sm ${getScoreBadgeClass(
-                score
+                score,
               )}`}
             >
               <span className="text-xl font-extrabold">{score}%</span>
