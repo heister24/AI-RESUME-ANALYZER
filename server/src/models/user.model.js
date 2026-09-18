@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema(
       unique: [true, "Username already taken"],
       required: true,
     },
+    name: {
+      type: String,
+      requierd: true,
+      trim: true,
+    },
     email: {
       type: String,
       unique: [true, "Account already exist with this email address."],
@@ -14,11 +19,30 @@ const userSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
     },
+    phoneNo: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female"],
+    },
     password: {
       type: String,
       minlength: [6, "Password should be atleast 6 characters long"],
       required: true,
       trim: true,
+    },
+    tokens: {
+      type: Number,
+      default: 3,
     },
   },
   {

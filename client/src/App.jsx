@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Report from "./Pages/Report";
 import Footer from "./components/Footer";
+import Profile from "./Pages/Profile";
 
 const App = () => {
   const location = useLocation();
@@ -18,8 +19,30 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/interview" element={<ProtectedRoutes><InterviewSetup /></ProtectedRoutes>} />
-        <Route path="/report" element={<ProtectedRoutes><Report /></ProtectedRoutes>} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/interview"
+          element={
+            <ProtectedRoutes>
+              <InterviewSetup />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/report"
+          element={
+            <ProtectedRoutes>
+              <Report />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

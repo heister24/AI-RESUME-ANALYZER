@@ -4,9 +4,9 @@ import jwt from "jsonwebtoken";
 
 const userRegister = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { name, phoneNo, username, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!name || !phoneNo || !username || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required.",
@@ -14,19 +14,21 @@ const userRegister = async (req, res) => {
     }
 
     const existUser = await UserModel.findOne({
-      $or: [{ email }, { username }],
+      $or: [{ email }, { username }, { phoneNo }],
     });
     if (existUser) {
       return res.status(400).json({
         success: false,
-        message: "User already exist with this username or email",
+        message: "User already exist with this username, phone no or email",
       });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await UserModel.create({
+      name,
       username,
+      phoneNo,
       email,
       password: hashedPassword,
     });
@@ -149,4 +151,33 @@ const userLogout = async (req, res) => {
   }
 };
 
-export { userRegister, userlogin, getCurrentUser, userLogout };
+const updateProfile = async (req, res) => {
+  try {
+    const { name, city, state, gender } = req.body;
+
+    await UserModel.findByIdAndUpdate(req.user.id, {
+      name: name,
+      city: city,
+      state: state,
+      gender: gender,
+    });
+
+    const updatedUser = await UserModel.findById(req.user.id).select("-password");
+
+    res.status(201).json({
+      success: true,
+      message: "Profile Updated Successfully",
+      updatedUser,
+    });
+
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+export { userRegister, userlogin, getCurrentUser, userLogout, updateProfile };

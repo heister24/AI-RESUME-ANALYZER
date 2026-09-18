@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getCurrentUser,
+  updateProfile,
   userlogin,
   userLogout,
   userRegister,
@@ -13,5 +14,6 @@ authRouter.post("/register", userRegister); //http://localhost:5000/api/auth/reg
 authRouter.post("/login", userlogin); //http://localhost:5000/api/auth/login
 authRouter.get("/getme", authMiddleware, getCurrentUser); //http://localhost:5000/api/auth/getme
 authRouter.get("/logout", authMiddleware, userLogout); //http://localhost:5000/api/auth/logout
+authRouter.post("/update-profile", authMiddleware, updateProfile); //http://localhost:5000/api/auth/update-profle
 
 export default authRouter;
