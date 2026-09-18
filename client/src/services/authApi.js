@@ -41,4 +41,9 @@ const logout = async () => {
   return res.data;
 };
 
-export { register, login, getMe, logout };
+const updateProfile = async (profileData) => {
+  const res = await api.post("/auth/update-profile", profileData);
+  return res.data;
+};
+
+export { register, login, getMe, logout, updateProfile };

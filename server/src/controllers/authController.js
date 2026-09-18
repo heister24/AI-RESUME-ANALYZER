@@ -153,31 +153,47 @@ const userLogout = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
+    // Phone number, email, and username are immutable once registered
     const { name, city, state, gender } = req.body;
 
-    await UserModel.findByIdAndUpdate(req.user.id, {
-      name: name,
-      city: city,
-      state: state,
-      gender: gender,
-    });
+    const updateFields = {};
+    if (name !== undefined) updateFields.name = name;
+    if (city !== undefined) updateFields.city = city;
+    if (state !== undefined) updateFields.state = state;
+    if (gender !== undefined) updateFields.gender = gender;
 
-    const updatedUser = await UserModel.findById(req.user.id).select("-password");
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.user.id,
+      { $set: updateFields },
+      { new: true, runValidators: true },
+    ).select("-password");
 
-    res.status(201).json({
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
       success: true,
-      message: "Profile Updated Successfully",
+      message: "Profile updated successfully",
+      user: updatedUser,
       updatedUser,
     });
-
-    console.log(user);
   } catch (error) {
-    console.log(error);
+    console.log("Update Profile Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Internal server error",
+      message: error.message || "Internal server error",
     });
   }
 };
 
-export { userRegister, userlogin, getCurrentUser, userLogout, updateProfile };
+export {
+  userRegister,
+  userlogin,
+  getCurrentUser,
+  userLogout,
+  updateProfile,
+};
