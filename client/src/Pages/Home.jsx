@@ -8,7 +8,7 @@ const Home = () => {
   const { navigate } = useContext(AuthContext);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
       <Navbar />
       <main className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-20">
         <motion.div
@@ -23,7 +23,7 @@ const Home = () => {
           </div>
           <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-gray-900 sm:text-7xl">
             Make your resume{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-500">
               impossible to overlook.
             </span>
           </h1>

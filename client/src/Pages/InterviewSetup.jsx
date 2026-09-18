@@ -3,7 +3,7 @@ import InterviewBriefForm from "../components/InterviewBriefForm";
 import InterviewProgress from "../components/InterviewProgress";
 
 const InterviewSetup = () => (
-  <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+  <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
     <Navbar />
     <main className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-20">
       <div className="mb-12">

@@ -35,7 +35,7 @@ const Register = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900 flex flex-col">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900 flex flex-col">
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 py-12 sm:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           
@@ -51,7 +51,7 @@ const Register = () => {
               Start stronger
             </p>
             <h1 className="mt-6 text-5xl font-extrabold tracking-tight sm:text-6xl">
-              Build your <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">career edge.</span>
+              Build your <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-500">career edge.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-gray-600">
               Create an account to get tailored resume insights in minutes. ResumeLens helps you find the signal in your experience.

@@ -99,8 +99,8 @@ const InterviewBriefForm = () => {
       className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/60 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-xl sm:p-10"
     >
       {/* Decorative gradient blob */}
-      <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-emerald-200/40 to-teal-100/40 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-gradient-to-tr from-green-200/30 to-emerald-50/30 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-linear-to-br from-emerald-200/40 to-teal-100/40 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-linear-to-tr from-green-200/30 to-emerald-50/30 blur-3xl" />
 
       <div className="relative z-10 border-b border-gray-200/60 pb-8">
         <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
@@ -109,7 +109,7 @@ const InterviewBriefForm = () => {
         </div>
         <h1 className="mt-5 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
           Analyze Your{" "}
-          <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
             Resume
           </span>
         </h1>
@@ -206,7 +206,7 @@ const InterviewBriefForm = () => {
           </p>
           <div className="relative group">
             <textarea
-              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-400/20 group-hover:border-blue-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-400/20 group-hover:border-blue-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
               rows={5}
               placeholder="E.g., We are looking for a Senior Frontend Developer with 5+ years of experience in React..."
               value={jobDescription}
@@ -243,7 +243,7 @@ const InterviewBriefForm = () => {
           </p>
           <div className="relative group">
             <textarea
-              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-purple-400 focus:outline-none focus:ring-4 focus:ring-purple-400/20 group-hover:border-purple-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-purple-400 focus:outline-none focus:ring-4 focus:ring-purple-400/20 group-hover:border-purple-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
               rows={4}
               placeholder="I am a passionate software engineer focused on building scalable web applications..."
               value={selfDescription}

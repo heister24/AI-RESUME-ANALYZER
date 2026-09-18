@@ -45,7 +45,7 @@ const InterviewProgress = () => (
             <div className="relative flex gap-5" key={step.label}>
               {/* Connecting line between steps */}
               {index < steps.length - 1 && (
-                <div className="absolute left-6 top-14 h-full w-[2px] -translate-x-1/2 bg-gray-800" />
+                <div className="absolute left-6 top-14 h-full w-0.5 -translate-x-1/2 bg-gray-800" />
               )}
               
               <div

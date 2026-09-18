@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="relative overflow-hidden bg-gray-950 px-6 py-16 text-gray-400 sm:px-10 lg:py-20">
       {/* Subtle background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[100px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-75 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl z-10">
         <div className="grid gap-12 border-b border-gray-800 pb-12 lg:grid-cols-[1.5fr_1fr] lg:items-start">
