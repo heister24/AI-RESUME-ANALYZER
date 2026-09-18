@@ -33,7 +33,7 @@ const Report = () => {
   const behaviorQuestions = report.behaviouralQuestions || [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
       <Navbar />
 
       <main className="mx-auto max-w-7xl px-6 py-10 sm:px-10 lg:py-14">
@@ -60,7 +60,7 @@ const Report = () => {
               </div>
               <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
                 Your Resume{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-500">
                   Report
                 </span>
               </h1>
@@ -76,7 +76,7 @@ const Report = () => {
                   Based on job description
                 </span>
               </div>
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 border-[4px] border-emerald-500">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 border-4 border-emerald-500">
                 <span className="text-xl font-bold text-emerald-700">
                   {score}%
                 </span>
@@ -107,10 +107,15 @@ const Report = () => {
                 </div>
                 <div className="space-y-4">
                   {skillGaps.map((gap, idx) => {
-                    const title = gap.skill || gap.skills || gap.topic || gap.gap || `Gap ${idx + 1}`;
+                    const title =
+                      gap.skill ||
+                      gap.skills ||
+                      gap.topic ||
+                      gap.gap ||
+                      `Gap ${idx + 1}`;
                     const severity = gap.severity;
                     const description = gap.description || gap.reason;
-                    
+
                     return (
                       <div
                         key={idx}
@@ -118,7 +123,7 @@ const Report = () => {
                       >
                         <div>
                           <h3 className="font-semibold text-gray-900 text-lg">
-                            {Array.isArray(title) ? title.join(', ') : title}
+                            {Array.isArray(title) ? title.join(", ") : title}
                           </h3>
                           {description && (
                             <p className="mt-1 text-sm text-gray-600 leading-relaxed">
@@ -127,11 +132,15 @@ const Report = () => {
                           )}
                         </div>
                         {severity && (
-                          <span className={`ml-4 inline-flex shrink-0 items-center rounded-md px-2.5 py-1 text-xs font-semibold capitalize ring-1 ring-inset ${
-                            severity.toLowerCase() === 'high' ? 'bg-red-50 text-red-700 ring-red-600/20' :
-                            severity.toLowerCase() === 'medium' ? 'bg-amber-50 text-amber-700 ring-amber-600/20' :
-                            'bg-green-50 text-green-700 ring-green-600/20'
-                          }`}>
+                          <span
+                            className={`ml-4 inline-flex shrink-0 items-center rounded-md px-2.5 py-1 text-xs font-semibold capitalize ring-1 ring-inset ${
+                              severity.toLowerCase() === "high"
+                                ? "bg-red-50 text-red-700 ring-red-600/20"
+                                : severity.toLowerCase() === "medium"
+                                  ? "bg-amber-50 text-amber-700 ring-amber-600/20"
+                                  : "bg-green-50 text-green-700 ring-green-600/20"
+                            }`}
+                          >
                             {severity} Priority
                           </span>
                         )}
@@ -161,7 +170,7 @@ const Report = () => {
                 <div className="relative border-l-2 border-gray-100 ml-4 space-y-8 pb-4">
                   {prepPlan.map((plan, idx) => (
                     <div key={idx} className="relative pl-6">
-                      <div className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-4 border-white bg-blue-500" />
+                      <div className="absolute -left-2.25 top-1 h-4 w-4 rounded-full border-4 border-white bg-blue-500" />
                       <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
                         Day {plan.day || idx + 1}
                       </span>

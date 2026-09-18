@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" width="260" height="52" fill="none">
+  <defs>
+    <linearGradient id="rl-logo-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="50%" stop-color="#065f46" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    
+    <linearGradient id="rl-logo-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="60%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+
+    <radialGradient id="rl-logo-lens-glow" cx="45%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#34D399" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#06B6D4" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0" />
+    </radialGradient>
+    
+    <linearGradient id="rl-logo-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ee7b7" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.3" />
+    </linearGradient>
+
+    <linearGradient id="rl-logo-text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+
+    <linearGradient id="rl-badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+  </defs>
+
+  <!-- ================= ICON EMBLEM ================= -->
+  <g transform="translate(2, 2)">
+    <!-- Squircle Base -->
+    <rect x="0" y="0" width="48" height="48" rx="13" fill="url(#rl-logo-bg)" />
+    <rect x="0.5" y="0.5" width="47" height="47" rx="12.5" stroke="url(#rl-logo-border)" stroke-width="1" />
+
+    <!-- Resume Document Silhouette -->
+    <path d="M13 12C13 10.8954 13.8954 10 15 10H26L33 17V34C33 35.1046 32.1046 36 31 36H15C13.8954 36 13 35.1046 13 34V12Z" 
+          fill="#082b21" stroke="#10b981" stroke-width="1.2" stroke-opacity="0.5" />
+    
+    <!-- Folded corner on document -->
+    <path d="M26 10V16C26 16.5523 26.4477 17 27 17H33" 
+          stroke="#10b981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6" />
+    
+    <!-- Document Preview Lines -->
+    <line x1="17" y1="18" x2="22" y2="18" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.85" />
+    <line x1="17" y1="22" x2="23" y2="22" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.55" />
+    <line x1="17" y1="26" x2="20" y2="26" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.55" />
+
+    <!-- Magnifying Optical Lens -->
+    <circle cx="28" cy="25" r="9.5" fill="url(#rl-logo-lens-glow)" />
+    <!-- Lens reflection -->
+    <path d="M23 21C24.3 19.4 26.2 18.5 28.2 18.5" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.8" />
+    <!-- Lens Ring -->
+    <circle cx="28" cy="25" r="9.5" stroke="url(#rl-logo-neon)" stroke-width="2.3" />
+    <!-- Lens Handle -->
+    <path d="M34.8 31.8L39.8 36.8" stroke="url(#rl-logo-neon)" stroke-width="2.6" stroke-linecap="round" />
+
+    <!-- Reticle Target inside Lens -->
+    <circle cx="28" cy="25" r="2" fill="#38BDF8" />
+    <circle cx="28" cy="25" r="4.8" stroke="#34D399" stroke-width="0.8" stroke-dasharray="2 1.5" stroke-opacity="0.85" />
+
+    <!-- AI Sparkle at Top Right -->
+    <path d="M37 9C37 11.2 38.6 12.8 40.8 12.8C38.6 12.8 37 14.4 37 16.6C37 14.4 35.4 12.8 33.2 12.8C35.4 12.8 37 11.2 37 9Z" 
+          fill="#34D399" />
+    <circle cx="37" cy="12.8" r="0.8" fill="#ffffff" />
+  </g>
+
+  <!-- ================= TYPOGRAPHY ================= -->
+  <g transform="translate(62, 33)">
+    <!-- "Resume" in Dark Slate / Black -->
+    <text x="0" y="0" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="23" 
+          font-weight="800" 
+          letter-spacing="-0.6px" 
+          fill="#0F172A">Resume</text>
+
+    <!-- "Lens" in Emerald-Teal Gradient -->
+    <text x="88" y="0" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="23" 
+          font-weight="800" 
+          letter-spacing="-0.6px" 
+          fill="url(#rl-logo-text-grad)">Lens</text>
+
+    <!-- "AI" Badge Pill -->
+    <rect x="144" y="-19" width="28" height="17" rx="8.5" fill="url(#rl-badge-grad)" />
+    <text x="158" y="-7.5" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="9.5" 
+          font-weight="800" 
+          letter-spacing="0.6px" 
+          text-anchor="middle" 
+          fill="#ffffff">AI</text>
+  </g>
+</svg>

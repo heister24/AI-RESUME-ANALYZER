@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Sparkles, FileSearch, Globe, Mail, MessageCircle } from "lucide-react";
+import { Sparkles, Globe, Mail, MessageCircle } from "lucide-react";
+import BrandMark from "./BrandMark";
 
 const Footer = () => {
   return (
@@ -10,12 +11,7 @@ const Footer = () => {
       <div className="relative mx-auto max-w-7xl z-10">
         <div className="grid gap-12 border-b border-gray-800 pb-12 lg:grid-cols-[1.5fr_1fr] lg:items-start">
           <div className="max-w-md">
-            <Link to="/" className="inline-flex items-center gap-3 text-2xl font-bold tracking-tight text-white transition-opacity hover:opacity-90">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 backdrop-blur-md">
-                <FileSearch className="h-5 w-5" />
-              </div>
-              ResumeLens
-            </Link>
+            <BrandMark theme="dark" size="lg" />
             <p className="mt-6 text-base leading-relaxed text-gray-400">
               Turn your experience into a clearer story. Our AI-powered analysis helps you craft perfectly tailored applications that stand out to recruiters.
             </p>
