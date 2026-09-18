@@ -34,4 +34,76 @@ const generateReport = async (req, res) => {
   }
 };
 
-export { generateReport };
+const getUserReports = async (req, res) => {
+  try {
+    const reports = await InterviewReportModel.find({ user: req.user.id })
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      reports,
+    });
+  } catch (error) {
+    console.log("Error fetching user reports:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch reports",
+    });
+  }
+};
+
+const getReportById = async (req, res) => {
+  try {
+    const report = await InterviewReportModel.findOne({
+      _id: req.params.id,
+      user: req.user.id,
+    });
+
+    if (!report) {
+      return res.status(404).json({
+        success: false,
+        message: "Report not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      report,
+    });
+  } catch (error) {
+    console.log("Error fetching report:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch report",
+    });
+  }
+};
+
+const deleteReport = async (req, res) => {
+  try {
+    const report = await InterviewReportModel.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.id,
+    });
+
+    if (!report) {
+      return res.status(404).json({
+        success: false,
+        message: "Report not found or not authorized to delete",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Report deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error deleting report:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to delete report",
+    });
+  }
+};
+
+export { generateReport, getUserReports, getReportById, deleteReport };

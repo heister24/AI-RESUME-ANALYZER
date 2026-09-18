@@ -7,23 +7,28 @@ const api = axios.create({
   withCredentials: true,
 });
 
-const register = async (username, email, password) => {
-  try {
-    const res = await api.post("/auth/register", { username, email, password });
+const register = async (name, username, phoneNo, email, password) => {
+  // const payload = {
+  //   name,
+  //   username,
+  //   phoneNo,
+  //   email,
+  //   password,
+  // };
 
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await api.post("/auth/register", {
+    name,
+    username,
+    email,
+    phoneNo,
+    password,
+  });
+  return res.data;
 };
 
 const login = async (email, password) => {
-  try {
-    const res = await api.post("/auth/login", { email, password });
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await api.post("/auth/login", { email, password });
+  return res.data;
 };
 
 const getMe = async () => {
@@ -31,13 +36,13 @@ const getMe = async () => {
     const res = await api.get("/auth/getme");
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log("Not authenticated or getMe failed", error?.message);
+    return null;
   }
 };
 
 const logout = async () => {
   const res = await api.get("/auth/logout");
-
   return res.data;
 };
 

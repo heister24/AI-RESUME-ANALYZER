@@ -22,4 +22,34 @@ const generateReport = async (formData) => {
   }
 };
 
-export { generateReport };
+const fetchUserReports = async () => {
+  try {
+    const res = await api.get("/interview/reports");
+    return res.data;
+  } catch (error) {
+    console.error("Fetching user reports failed:", error);
+    throw error;
+  }
+};
+
+const fetchReportById = async (id) => {
+  try {
+    const res = await api.get(`/interview/report/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Fetching report failed:", error);
+    throw error;
+  }
+};
+
+const deleteReportById = async (id) => {
+  try {
+    const res = await api.delete(`/interview/report/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Deleting report failed:", error);
+    throw error;
+  }
+};
+
+export { generateReport, fetchUserReports, fetchReportById, deleteReportById };

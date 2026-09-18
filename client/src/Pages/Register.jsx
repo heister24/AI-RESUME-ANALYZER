@@ -4,6 +4,8 @@ import { register } from "../services/authApi";
 import BrandMark from "../components/BrandMark";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,13 +19,26 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+
+    if (!name.trim() || !phoneNo.trim() || !username.trim() || !email.trim()) {
+      setErrorMessage("All fields are required.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return;
     }
+
     try {
       setLoading(true);
-      const data = await register(username, email, password);
+      const data = await register(
+        name.trim(),
+        username.trim(),
+        phoneNo.trim(),
+        email.trim(),
+        password,
+      );
       setUser(data.user);
       navigate("/");
     } catch (error) {
@@ -35,6 +50,7 @@ const Register = () => {
       setLoading(false);
     }
   };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900 flex flex-col">
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 py-12 sm:px-10 lg:py-20">
@@ -105,6 +121,46 @@ const Register = () => {
                   </div>
                 )}
 
+                {/* Full Name */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-gray-700">
+                    Full Name
+                  </label>
+                  <input
+                    className="w-full rounded-2xl border border-gray-200 bg-white/80 px-5 py-4 text-gray-900 shadow-sm outline-none transition-all focus:ring-4 focus:ring-emerald-500/20"
+                    type="text"
+                    placeholder="Alex Johnson"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {/* Phone Number */}
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <label className="block text-sm font-semibold text-gray-700">
+                      Phone Number
+                    </label>
+                    <span className="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200/60 px-2.5 py-0.5 rounded-md">
+                      Cannot be changed later
+                    </span>
+                  </div>
+                  <input
+                    className="w-full rounded-2xl border border-gray-200 bg-white/80 px-5 py-4 text-gray-900 shadow-sm outline-none transition-all focus:ring-4 focus:ring-emerald-500/20"
+                    type="tel"
+                    placeholder="+91 9876543210"
+                    value={phoneNo}
+                    onChange={(e) => setPhoneNo(e.target.value)}
+                    required
+                  />
+                  <p className="mt-1.5 text-xs text-gray-500">
+                    Your phone number is permanently linked to your profile and
+                    cannot be modified once registered.
+                  </p>
+                </div>
+
+                {/* Username */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Username
@@ -112,13 +168,14 @@ const Register = () => {
                   <input
                     className="w-full rounded-2xl border border-gray-200 bg-white/80 px-5 py-4 text-gray-900 shadow-sm outline-none transition-all focus:ring-4 focus:ring-emerald-500/20"
                     type="text"
-                    placeholder="Alex00"
+                    placeholder="alex_dev"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                   />
                 </div>
 
+                {/* Email */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Email address
@@ -133,6 +190,7 @@ const Register = () => {
                   />
                 </div>
 
+                {/* Password */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Password
@@ -145,7 +203,7 @@ const Register = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      minLength={8}
+                      minLength={6}
                     />
                     <button
                       type="button"
@@ -167,10 +225,11 @@ const Register = () => {
                     ))}
                   </div>
                   <p className="mt-2 text-xs text-gray-500">
-                    Use at least 8 characters for a stronger password.
+                    Use at least 6 characters for a stronger password.
                   </p>
                 </div>
 
+                {/* Confirm Password */}
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Confirm password
@@ -182,7 +241,7 @@ const Register = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    minLength={8}
+                    minLength={6}
                   />
                 </div>
 

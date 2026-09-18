@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { updateProfile, logout } from "../services/authApi";
+import { updateProfile } from "../services/authApi";
 import Navbar from "../components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -27,7 +27,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { user, setUser, navigate } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   // Active Tab state
   const [activeTab, setActiveTab] = useState("personal");

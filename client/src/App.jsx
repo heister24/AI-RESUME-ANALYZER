@@ -12,7 +12,7 @@ import Profile from "./Pages/Profile";
 
 const App = () => {
   const location = useLocation();
-  const hideFooterRoutes = ["/login", "/register"];
+  const hideFooterRoutes = ["/login", "/register", "/profile", "/report"];
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
   return (
