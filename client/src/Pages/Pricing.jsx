@@ -217,7 +217,7 @@ const Pricing = () => {
 
               <div className="flex items-center gap-4 mb-6">
                 <div
-                  className={`p-3 rounded-2xl bg-gradient-to-br ${plan.color} ${plan.borderColor} border`}
+                  className={`p-3 rounded-2xl bg-linear-to-br ${plan.color} ${plan.borderColor} border`}
                 >
                   {plan.icon}
                 </div>

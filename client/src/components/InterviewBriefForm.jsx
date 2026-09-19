@@ -50,7 +50,7 @@ const InterviewBriefForm = () => {
 
       const result = await generateReport(formData);
       console.log("Report generated successfully:", result);
-      
+
       // Update local token count
       if (user && result.tokens !== undefined) {
         setUser({ ...user, tokens: result.tokens });
@@ -213,7 +213,7 @@ const InterviewBriefForm = () => {
           </p>
           <div className="relative group">
             <textarea
-              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-400/20 group-hover:border-blue-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-blue-400/20 group-hover:border-blue-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
               rows={5}
               placeholder="E.g., We are looking for a Senior Frontend Developer with 5+ years of experience in React..."
               value={jobDescription}
@@ -250,7 +250,7 @@ const InterviewBriefForm = () => {
           </p>
           <div className="relative group">
             <textarea
-              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:border-purple-400 focus:outline-none focus:ring-4 focus:ring-purple-400/20 group-hover:border-purple-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+              className="w-full resize-none rounded-xl border border-gray-200 bg-white/80 p-4 text-gray-700 shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-purple-400/20 group-hover:border-purple-200 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
               rows={4}
               placeholder="I am a passionate software engineer focused on building scalable web applications..."
               value={selfDescription}
