@@ -77,6 +77,9 @@ const Navbar = () => {
           <NavLink to="/contact" className={linkClass}>
             Contact
           </NavLink>
+          <NavLink to="/pricing" className={linkClass}>
+            Pricing
+          </NavLink>
         </nav>
 
         <div className="order-2 flex items-center gap-4 sm:order-3">

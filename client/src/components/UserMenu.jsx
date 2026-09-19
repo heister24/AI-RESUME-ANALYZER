@@ -43,7 +43,7 @@ const UserMenu = ({ user, onSignOut, loggingOut }) => {
           <FileText className="h-4 w-4" />
           Reports
         </NavLink>
-        <NavLink to="/billing" className={menuLinkClass}>
+        <NavLink to="/pricing" className={menuLinkClass}>
           <CurrencyIcon className="h-4 w-4" />
           Billing
         </NavLink>

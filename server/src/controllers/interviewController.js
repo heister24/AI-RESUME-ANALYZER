@@ -1,9 +1,18 @@
 import { PDFParse } from "pdf-parse";
 import generateInterviewReport from "../services/ai.service.js";
 import InterviewReportModel from "../models/interviewReport.model.js";
+import UserModel from "../models/user.model.js";
 
 const generateReport = async (req, res) => {
   try {
+    const user = await UserModel.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    if (user.tokens < 1) {
+      return res.status(403).json({ success: false, message: "Not enough tokens to generate report. Please purchase more." });
+    }
+
     const resumeContent = await (new PDFParse(Uint8Array.from(req.file.buffer))).getText();
     const { selfDescription, jobDescription } = req.body;
 
@@ -21,9 +30,13 @@ const generateReport = async (req, res) => {
       ...interViewReportByAI,
     });
 
+    user.tokens -= 1;
+    await user.save();
+
     res.status(200).json({
       message: "Interview report generated successfully",
       interviewReport,
+      tokens: user.tokens,
     });
   } catch (error) {
     console.log(error);

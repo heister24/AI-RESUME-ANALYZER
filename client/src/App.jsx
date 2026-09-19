@@ -9,6 +9,7 @@ import Contact from "./Pages/Contact";
 import Report from "./Pages/Report";
 import Footer from "./components/Footer";
 import Profile from "./Pages/Profile";
+import Pricing from "./Pages/Pricing";
 
 const App = () => {
   const location = useLocation();
@@ -40,6 +41,14 @@ const App = () => {
           element={
             <ProtectedRoutes>
               <Report />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            <ProtectedRoutes>
+              <Pricing />
             </ProtectedRoutes>
           }
         />

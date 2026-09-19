@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import {
   UploadCloud,
   FileText,
@@ -10,6 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { generateReport } from "../services/aiApi";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const suggestions = [
   "Frontend Engineer at Google",
@@ -26,6 +27,7 @@ const InterviewBriefForm = () => {
   const [submitError, setSubmitError] = useState("");
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,6 +51,11 @@ const InterviewBriefForm = () => {
       const result = await generateReport(formData);
       console.log("Report generated successfully:", result);
       
+      // Update local token count
+      if (user && result.tokens !== undefined) {
+        setUser({ ...user, tokens: result.tokens });
+      }
+
       // Navigate to report page, passing the result via state
       navigate("/report", { state: { reportData: result } });
     } catch (error) {
