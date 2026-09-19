@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import authRouter from "./routes/authRoutes.js";
 import interviewRouter from "./routes/interviewRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js";
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(
 
 app.use("/api/auth", authRouter);
 app.use("/api/interview", interviewRouter);
+app.use("/api/payment", paymentRouter);
 
 export default app;
