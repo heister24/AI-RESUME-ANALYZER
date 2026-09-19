@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
     },
     tokens: {
       type: Number,
-      default: 3,
+      default: 1,
     },
   },
   {

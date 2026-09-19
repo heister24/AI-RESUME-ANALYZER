@@ -190,10 +190,4 @@ const updateProfile = async (req, res) => {
   }
 };
 
-export {
-  userRegister,
-  userlogin,
-  getCurrentUser,
-  userLogout,
-  updateProfile,
-};
+export { userRegister, userlogin, getCurrentUser, userLogout, updateProfile };

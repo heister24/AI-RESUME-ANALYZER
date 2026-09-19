@@ -49,7 +49,7 @@ const InterviewBriefForm = () => {
       formData.append("jobDescription", jobDescription);
 
       const result = await generateReport(formData);
-      console.log("Report generated successfully:", result);
+      // console.log("Report generated successfully:", result);
 
       // Update local token count
       if (user && result.tokens !== undefined) {
@@ -59,7 +59,7 @@ const InterviewBriefForm = () => {
       // Navigate to report page, passing the result via state
       navigate("/report", { state: { reportData: result } });
     } catch (error) {
-      console.error("Submission failed:", error);
+      // console.error("Submission failed:", error);
       setSubmitError(
         error?.response?.data?.message ||
           "Unable to generate the report right now. Please try again.",

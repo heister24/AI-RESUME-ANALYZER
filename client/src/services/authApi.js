@@ -36,7 +36,7 @@ const getMe = async () => {
     const res = await api.get("/auth/getme");
     return res.data;
   } catch (error) {
-    console.log("Not authenticated or getMe failed", error?.message);
+    // console.log("Not authenticated or getMe failed", error?.message);
     return null;
   }
 };

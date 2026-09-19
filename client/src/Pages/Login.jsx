@@ -19,11 +19,11 @@ const Login = () => {
 
     try {
       const data = await login(email, password);
-      console.log("Logged In user", data);
+      // console.log("Logged In user", data);
       setUser(data.user);
       navigate("/");
     } catch (error) {
-      console.log("Login Error", error);
+      // console.log("Login Error", error);
       const message =
         error.response?.data?.message || "Invalid email or password.";
       setErrorMessage(message);

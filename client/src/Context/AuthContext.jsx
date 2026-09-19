@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
       try {
         const res = await getMe();
         setUser(res?.user || null);
-        console.log(res)
+        // console.log(res);
       } finally {
         setAuthLoading(false);
       }
