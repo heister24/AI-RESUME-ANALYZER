@@ -52,4 +52,39 @@ const deleteReportById = async (id) => {
   }
 };
 
-export { generateReport, fetchUserReports, fetchReportById, deleteReportById };
+const rewriteBullet = async ({ rawBullet, targetRole }) => {
+  try {
+    const res = await api.post("/interview/rewrite-bullet", {
+      rawBullet,
+      targetRole,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Bullet optimization failed:", error);
+    throw error;
+  }
+};
+
+const createCoverLetter = async ({ reportId, companyName, resume, jobDescription }) => {
+  try {
+    const res = await api.post("/interview/generate-cover-letter", {
+      reportId,
+      companyName,
+      resume,
+      jobDescription,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Cover letter generation failed:", error);
+    throw error;
+  }
+};
+
+export {
+  generateReport,
+  fetchUserReports,
+  fetchReportById,
+  deleteReportById,
+  rewriteBullet,
+  createCoverLetter,
+};

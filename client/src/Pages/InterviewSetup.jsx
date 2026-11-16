@@ -1,30 +1,19 @@
 import Navbar from "../components/Navbar";
 import InterviewBriefForm from "../components/InterviewBriefForm";
-import InterviewProgress from "../components/InterviewProgress";
 
 const InterviewSetup = () => (
-  <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+  <div className="min-h-screen bg-[#EDE8F5] text-[#18203D] font-sans selection:bg-[#3D52A0] selection:text-white">
     <Navbar />
-    <main className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:py-20">
-      <div className="mb-12">
-        <div className="inline-flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white shadow-md shadow-emerald-600/20">
-            1
-          </span>
-          <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">
-            Resume Analysis Setup
-          </p>
-        </div>
-      </div>
-      <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start xl:gap-12">
-        <div className="sticky top-24">
-          <InterviewProgress />
-        </div>
-        <div className="w-full">
-          <InterviewBriefForm />
-        </div>
-      </div>
-    </main>
+
+    <div className="relative overflow-hidden bg-grid-pattern">
+      {/* Soft ambient atmospheric lighting in Foundations palette */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[#7091E6]/15 blur-[150px]" />
+      <div className="pointer-events-none absolute top-96 -right-20 h-[400px] w-[400px] rounded-full bg-[#ADBBDA]/25 blur-[140px]" />
+
+      <main className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <InterviewBriefForm />
+      </main>
+    </div>
   </div>
 );
 

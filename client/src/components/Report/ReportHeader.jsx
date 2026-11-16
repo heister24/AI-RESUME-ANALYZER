@@ -1,56 +1,47 @@
-import { Sparkles, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ReportHeader = ({ totalCount, avgScore, highestScore }) => {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-gray-200/70 bg-white/75 p-6 shadow-xl backdrop-blur-xl sm:p-10 mb-8">
-      {/* Decorative ambient aura */}
-      <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl" />
-
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+    <div className="rounded-3xl border border-[#ADBBDA]/50 bg-white/90 backdrop-blur-xl p-6 sm:p-8 mb-8 shadow-xl shadow-[#3D52A0]/5 text-[#18203D]">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 px-3.5 py-1 text-xs font-bold text-emerald-700 mb-3">
-            <Sparkles className="h-3.5 w-3.5" />
-            Interview Analysis Hub
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#5E6987]">
+            Overview
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-            Your Saved{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-500">
-              Resume Reports
-            </span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#18203D] mt-1">
+            Saved Reports
           </h1>
-          <p className="mt-2 text-sm text-gray-600 max-w-xl leading-relaxed">
-            Compare ATS match scores, track your preparation roadmaps, and review technical questions generated for each target role.
+          <p className="mt-1 text-xs sm:text-sm text-[#5E6987] max-w-lg leading-relaxed">
+            Review past resume evaluations, target match scores, and customized preparation plans.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          {/* Summary Metric Badges */}
-          <div className="flex items-center gap-3">
-            <div className="rounded-2xl border border-gray-200/70 bg-white/80 p-4 min-w-28 text-center shadow-xs">
-              <div className="text-xs font-semibold uppercase text-gray-500">
-                Total
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+            <div className="flex-1 sm:flex-initial rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 p-3 min-w-20 text-center">
+              <div className="text-[10px] font-medium uppercase tracking-wider text-[#5E6987]">
+                Reports
               </div>
-              <div className="text-2xl font-extrabold text-gray-900 mt-1">
+              <div className="text-lg font-bold text-[#18203D] mt-0.5">
                 {totalCount}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-200/70 bg-white/80 p-4 min-w-28 text-center shadow-xs">
-              <div className="text-xs font-semibold uppercase text-gray-500">
+            <div className="flex-1 sm:flex-initial rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 p-3 min-w-20 text-center">
+              <div className="text-[10px] font-medium uppercase tracking-wider text-[#5E6987]">
                 Avg Match
               </div>
-              <div className="text-2xl font-extrabold text-emerald-600 mt-1">
+              <div className="text-lg font-bold text-[#18203D] mt-0.5">
                 {avgScore}%
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-200/70 bg-white/80 p-4 min-w-28 text-center shadow-xs">
-              <div className="text-xs font-semibold uppercase text-gray-500">
-                Top Score
+            <div className="flex-1 sm:flex-initial rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 p-3 min-w-20 text-center">
+              <div className="text-[10px] font-medium uppercase tracking-wider text-[#5E6987]">
+                Top Match
               </div>
-              <div className="text-2xl font-extrabold text-teal-600 mt-1">
+              <div className="text-lg font-bold text-[#3D52A0] mt-0.5">
                 {highestScore}%
               </div>
             </div>
@@ -58,10 +49,10 @@ const ReportHeader = ({ totalCount, avgScore, highestScore }) => {
 
           <Link
             to="/interview"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition-all hover:bg-emerald-700"
+            className="w-full sm:w-auto pearl-btn flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold cursor-pointer"
           >
-            <Plus className="h-4 w-4" />
-            New Analysis
+            <Plus className="h-3.5 w-3.5" />
+            <span>New Analysis</span>
           </Link>
         </div>
       </div>

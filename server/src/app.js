@@ -4,6 +4,7 @@ import cors from "cors";
 import authRouter from "./routes/authRoutes.js";
 import interviewRouter from "./routes/interviewRoutes.js";
 import paymentRouter from "./routes/paymentRoutes.js";
+import { apiLimiter } from "./middlewares/rateLimitMiddleware.js";
 
 const app = express();
 
@@ -15,6 +16,18 @@ app.use(
     credentials: true,
   }),
 );
+
+// General rate limiting across all API endpoints
+app.use("/api", apiLimiter);
+
+// Production Health Check endpoint for load balancers
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "healthy",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
 
 app.use("/api/auth", authRouter);
 app.use("/api/interview", interviewRouter);

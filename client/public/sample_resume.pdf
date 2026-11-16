@@ -1,0 +1,66 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1943 >>
+stream
+BT
+/F1 9 Tf
+72 740 Td
+13 TL
+(ALEX MORGAN) Tj
+T* (Senior Full Stack & Cloud Systems Engineer) Tj
+T* (Email: alex.morgan@example.com | Phone: +1-555-0192 | San Francisco, CA) Tj
+T* (GitHub: github.com/alexmorgan | LinkedIn: linkedin.com/in/alexmorgan-dev) Tj
+T* () Tj
+T* (EXECUTIVE SUMMARY) Tj
+T* (Senior Software Engineer with 6+ years of experience architecting high-throughput distributed) Tj
+T* (systems, Next.js web applications, and automated cloud infrastructure on AWS. Strong focus on) Tj
+T* (Core Web Vitals, API latency optimization, microservices, and leading agile engineering squads.) Tj
+T* () Tj
+T* (TECHNICAL COMPETENCIES) Tj
+T* (Languages: TypeScript, JavaScript \(ESNext\), Go, Python, SQL, HTML5, CSS3) Tj
+T* (Frontend: React 19, Next.js \(App Router\), TailwindCSS, State Management, Vitest) Tj
+T* (Backend: Node.js, Express, Go, RESTful APIs, GraphQL Federation, Microservices) Tj
+T* (Data & Cloud: PostgreSQL, Redis, MongoDB, AWS \(EKS, S3, CloudFront\), Docker, CI/CD) Tj
+T* () Tj
+T* (PROFESSIONAL EXPERIENCE) Tj
+T* (Senior Software Engineer | CloudScale Systems \(2022 - Present\)) Tj
+T* (- Architected high-throughput Next.js frontend serving 2.5M monthly active users.) Tj
+T* (- Designed distributed caching layer with Redis, reducing p95 latency by 44%.) Tj
+T* (- Migrated monolithic core into decoupled containerized micro-services on AWS EKS.) Tj
+T* (- Authored 12+ architectural RFCs and established automated end-to-end testing pipelines.) Tj
+T* () Tj
+T* (Full Stack Software Engineer | DataFlow Labs \(2019 - 2022\)) Tj
+T* (- Developed real-time telemetry analytics dashboards using React, WebSockets, and Node.js.) Tj
+T* (- Implemented enterprise-grade RBAC authentication and OAuth 2.0 security protocols.) Tj
+T* (- Increased automated test coverage from 45% to 88% with Jest and Playwright.) Tj
+T* () Tj
+T* (EDUCATION) Tj
+T* (B.S. in Computer Science | University of California, Berkeley \(2015 - 2019\)) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000224 00000 n 
+0000000450 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+550
+%%EOF

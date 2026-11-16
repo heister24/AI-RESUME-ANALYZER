@@ -72,6 +72,25 @@ const prepairationPlanSchema = new mongoose.Schema(
   },
 );
 
+const categoryHeatmapSchema = new mongoose.Schema(
+  {
+    score: { type: Number, default: 0 },
+    matched: [{ type: String }],
+    missing: [{ type: String }],
+  },
+  { _id: false },
+);
+
+const skillsHeatmapSchema = new mongoose.Schema(
+  {
+    hardSkills: categoryHeatmapSchema,
+    cloudAndDevOps: categoryHeatmapSchema,
+    methodologies: categoryHeatmapSchema,
+    softSkills: categoryHeatmapSchema,
+  },
+  { _id: false },
+);
+
 const interviewReportSchema = new mongoose.Schema(
   {
     jobDescription: {
@@ -92,6 +111,7 @@ const interviewReportSchema = new mongoose.Schema(
     technicalQuestions: [technicalQuestionsSchema],
     behaviouralQuestions: [behaviouralQuestionsSchema],
     skillGaps: [skillGapSchema],
+    skillsHeatmap: skillsHeatmapSchema,
     prepairationPlan: [prepairationPlanSchema],
     user: {
       type: mongoose.Schema.Types.ObjectId,

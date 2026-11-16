@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
@@ -56,6 +56,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* Wildcard 404 redirect */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {shouldShowFooter && <Footer />}
     </>

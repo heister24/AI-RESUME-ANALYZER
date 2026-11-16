@@ -9,18 +9,15 @@ import {
   Phone,
   MapPin,
   Calendar,
-  Sparkles,
   ShieldCheck,
   CheckCircle2,
   AlertCircle,
   Save,
   Loader2,
-  Coins,
-  LogOut,
+  Wallet,
   ArrowRight,
   Lock,
   Compass,
-  FileSearch,
   Check,
   RotateCcw,
 } from "lucide-react";
@@ -29,10 +26,8 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  // Active Tab state
   const [activeTab, setActiveTab] = useState("personal");
 
-  // Form State
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -43,11 +38,9 @@ const Profile = () => {
     gender: "",
   });
 
-  // UI state
   const [isSaving, setIsSaving] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: "", text: "" });
 
-  // Initialize form when user data is ready
   useEffect(() => {
     if (user) {
       setFormData({
@@ -67,7 +60,7 @@ const Profile = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (statusMessage.text) setStatusMessage({ type: "", text: "" });
   };
-  // reset functionality
+
   const handleReset = () => {
     if (user) {
       setFormData({
@@ -82,7 +75,7 @@ const Profile = () => {
       setStatusMessage({ type: "", text: "" });
     }
   };
-  // handle submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
@@ -97,14 +90,13 @@ const Profile = () => {
       });
 
       if (response && response.success) {
-        // Update user context so Navbar and other components sync immediately
         const updated = response.user || response.updatedUser;
         if (updated) {
           setUser((prev) => ({ ...prev, ...updated }));
         }
         setStatusMessage({
           type: "success",
-          text: response.message || "Profile updated successfully!",
+          text: response.message || "Profile parameters successfully saved.",
         });
       } else {
         setStatusMessage({
@@ -114,7 +106,6 @@ const Profile = () => {
         });
       }
     } catch (err) {
-      console.error("Profile update failed:", err);
       const errText =
         err.response?.data?.message ||
         "An unexpected error occurred while saving.";
@@ -124,7 +115,6 @@ const Profile = () => {
     }
   };
 
-  // Helper formatting for join date
   const memberSince = user?.createdAt
     ? new Date(user.createdAt).toLocaleDateString(undefined, {
         month: "long",
@@ -132,7 +122,6 @@ const Profile = () => {
       })
     : "Recently joined";
 
-  // Calculate profile completeness score
   const calculateCompleteness = () => {
     const fields = [
       formData.name,
@@ -151,439 +140,419 @@ const Profile = () => {
   const tokenCount = user?.tokens ?? 3;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-900 font-sans selection:bg-emerald-200 selection:text-emerald-900 flex flex-col">
+    <div className="min-h-screen bg-[#EDE8F5] text-[#18203D] font-sans selection:bg-[#3D52A0] selection:text-white flex flex-col pb-20">
       <Navbar />
 
-      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 py-10 sm:px-10 lg:py-14">
-        {/* ================= HERO OVERVIEW CARD ================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-          className="relative overflow-hidden rounded-3xl border border-gray-200/70 bg-white/75 p-6 shadow-xl backdrop-blur-xl sm:p-8 lg:p-10 mb-8"
-        >
-          {/* Subtle decorative aura blobs */}
-          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-          <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl" />
+      <div className="relative overflow-hidden bg-grid-pattern flex-1">
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#7091E6]/15 blur-[160px]" />
+        <div className="pointer-events-none absolute top-96 right-0 h-[400px] w-[400px] rounded-full bg-[#ADBBDA]/25 blur-[140px]" />
 
-          <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            {/* User Identity Info */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              <div className="relative shrink-0">
-                <div className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-3xl bg-linear-to-tr from-emerald-600 via-emerald-500 to-teal-400 text-white text-3xl font-extrabold shadow-lg shadow-emerald-600/25">
-                  {(formData.name || formData.username || "R")
-                    .charAt(0)
-                    .toUpperCase()}
+        <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          {/* Overview Hero Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="pro-card-elevated rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden"
+          >
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              {/* User Identity Info */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+                <div className="relative shrink-0">
+                  <div className="flex h-18 w-18 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-[#EDE8F5] text-[#3D52A0] text-2xl sm:text-3xl font-extrabold border border-[#ADBBDA]/60 shadow-md">
+                    {(formData.name || formData.username || "U")
+                      .charAt(0)
+                      .toUpperCase()}
+                  </div>
+                  <div
+                    title="Account Verified"
+                    className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-white border border-[#ADBBDA]/60 shadow-xs"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  </div>
                 </div>
-                <div
-                  title="Account Active"
-                  className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md"
-                >
-                  <span className="h-3.5 w-3.5 rounded-full bg-emerald-500 ring-2 ring-white" />
+
+                <div>
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#18203D]">
+                      {formData.name || formData.username || "Candidate Workspace"}
+                    </h1>
+                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800">
+                      <ShieldCheck className="h-3 w-3 text-emerald-600" />
+                      Verified
+                    </span>
+                  </div>
+
+                  <div className="mt-1.5 flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-[#5E6987]">
+                    {formData.username && (
+                      <span className="font-semibold text-[#18203D]">
+                        @{formData.username}
+                      </span>
+                    )}
+                    {formData.email && (
+                      <span className="flex items-center gap-1">
+                        <Mail className="h-3 w-3 text-[#8697C4]" />
+                        {formData.email}
+                      </span>
+                    )}
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3 text-[#8697C4]" />
+                      Joined {memberSince}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900">
-                    {formData.name || formData.username || "Your Account"}
-                  </h1>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 px-3 py-1 text-xs font-bold text-emerald-700">
-                    <ShieldCheck className="h-3.5 w-3.5" />
-                    Verified User
-                  </span>
+              {/* Quick Stats Pill Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                <div className="rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] p-3.5 shadow-xs">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#8697C4]">
+                    <Wallet className="h-3 w-3 text-[#3D52A0]" />
+                    AI Credits
+                  </div>
+                  <div className="mt-1 flex items-baseline gap-1">
+                    <span className="text-xl font-extrabold text-[#18203D]">
+                      {tokenCount}
+                    </span>
+                    <span className="text-[10px] text-[#5E6987]">available</span>
+                  </div>
                 </div>
 
-                <div className="mt-2 flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-600">
-                  {formData.username && (
-                    <span className="font-semibold text-gray-700">
-                      @{formData.username}
+                <div className="rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] p-3.5 shadow-xs">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#8697C4]">
+                    <User className="h-3 w-3 text-[#3D52A0]" />
+                    Completeness
+                  </div>
+                  <div className="mt-1 flex items-baseline gap-1">
+                    <span className="text-xl font-extrabold text-[#18203D]">
+                      {completeness}%
                     </span>
-                  )}
-                  {formData.email && (
-                    <span className="flex items-center gap-1.5 text-gray-500">
-                      <Mail className="h-4 w-4 text-gray-400" />
-                      {formData.email}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-1.5 text-gray-500">
-                    <Calendar className="h-4 w-4 text-gray-400" />
-                    Joined {memberSince}
+                    <span className="text-[10px] text-[#5E6987]">filled</span>
+                  </div>
+                </div>
+
+                <div className="col-span-2 sm:col-span-1 rounded-2xl border border-[#ADBBDA]/60 bg-[#EDE8F5]/80 p-3.5 flex flex-col justify-between shadow-xs">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#8697C4]">
+                    Quick Action
                   </span>
+                  <Link
+                    to="/interview"
+                    className="mt-1 inline-flex items-center justify-between text-xs font-bold text-[#3D52A0] hover:underline"
+                  >
+                    Run Analyzer
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
               </div>
             </div>
+          </motion.div>
 
-            {/* Quick Stats Pill Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {/* Token Stat */}
-              <div className="rounded-2xl border border-gray-200/60 bg-white/80 p-4 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  <Coins className="h-4 w-4 text-emerald-600" />
-                  AI Credits
-                </div>
-                <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-2xl font-extrabold text-gray-900">
-                    {tokenCount}
-                  </span>
-                  <span className="text-xs text-gray-400">remaining</span>
-                </div>
-              </div>
+          {/* Tabs */}
+          <div className="flex items-center gap-2 border-b border-[#ADBBDA]/50 pb-3 mb-6">
+            <button
+              type="button"
+              onClick={() => setActiveTab("personal")}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                activeTab === "personal"
+                  ? "bg-[#3D52A0] text-white font-bold shadow-xs"
+                  : "text-[#5E6987] hover:text-[#18203D] hover:bg-white/60"
+              }`}
+            >
+              <User className="h-3.5 w-3.5" />
+              Profile Details
+            </button>
 
-              {/* Profile Completeness */}
-              <div className="rounded-2xl border border-gray-200/60 bg-white/80 p-4 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  <User className="h-4 w-4 text-teal-600" />
-                  Profile
-                </div>
-                <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-2xl font-extrabold text-gray-900">
-                    {completeness}%
-                  </span>
-                  <span className="text-xs text-gray-400">completed</span>
-                </div>
-              </div>
-
-              {/* Quick Action Button */}
-              <div className="col-span-2 sm:col-span-1 rounded-2xl border border-emerald-200/60 bg-emerald-50/70 p-4 flex flex-col justify-between">
-                <div className="text-xs font-semibold uppercase tracking-wider text-emerald-800">
-                  Resume Copilot
-                </div>
-                <Link
-                  to="/interview"
-                  className="mt-2 inline-flex items-center justify-between text-xs font-bold text-emerald-700 hover:text-emerald-800"
-                >
-                  Analyze Resume
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={() => setActiveTab("security")}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                activeTab === "security"
+                  ? "bg-[#3D52A0] text-white font-bold shadow-xs"
+                  : "text-[#5E6987] hover:text-[#18203D] hover:bg-white/60"
+              }`}
+            >
+              <ShieldCheck className="h-3.5 w-3.5" />
+              Security Architecture
+            </button>
           </div>
-        </motion.div>
 
-        {/* ================= TABS NAVIGATION ================= */}
-        <div className="flex items-center gap-2 border-b border-gray-200/80 pb-4 mb-8 overflow-x-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab("personal")}
-            className={`flex cursor-pointer items-center gap-2.5 rounded-2xl px-5 py-3 text-sm font-semibold transition-all ${
-              activeTab === "personal"
-                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/25"
-                : "text-gray-600 hover:bg-white/80 hover:text-gray-900"
-            }`}
-          >
-            <User className="h-4 w-4" />
-            Personal Details
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab("security")}
-            className={`flex cursor-pointer items-center gap-2.5 rounded-2xl px-5 py-3 text-sm font-semibold transition-all ${
-              activeTab === "security"
-                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/25"
-                : "text-gray-600 hover:bg-white/80 hover:text-gray-900"
-            }`}
-          >
-            <ShieldCheck className="h-4 w-4" />
-            Security & Account
-          </button>
-        </div>
-
-        {/* ================= TAB CONTENT ================= */}
-        <AnimatePresence mode="wait">
-          {activeTab === "personal" && (
-            <motion.div
-              key="personal-tab"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-            >
-              <form onSubmit={handleSubmit}>
-                <div className="rounded-3xl border border-gray-200/70 bg-white/75 p-6 sm:p-10 shadow-xl backdrop-blur-xl">
-                  {/* Tab Title */}
-                  <div className="border-b border-gray-100 pb-6 mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div>
-                      <h2 className="text-xl font-bold tracking-tight text-gray-900">
-                        Personal Information
-                      </h2>
-                      <p className="mt-1 text-sm text-gray-500">
-                        Update your identity, contact details, and location for
-                        customized interview reports.
-                      </p>
-                    </div>
-
-                    {/* Completeness Bar */}
-                    <div className="w-full sm:w-48">
-                      <div className="flex justify-between text-xs font-semibold text-gray-500 mb-1.5">
-                        <span>Completion</span>
-                        <span className="text-emerald-600 font-bold">
-                          {completeness}%
-                        </span>
+          {/* Tab Content */}
+          <AnimatePresence mode="wait">
+            {activeTab === "personal" && (
+              <motion.div
+                key="personal-tab"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <form onSubmit={handleSubmit}>
+                  <div className="pro-card rounded-3xl p-6 sm:p-8">
+                    <div className="border-b border-[#ADBBDA]/50 pb-5 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div>
+                        <h2 className="text-lg font-bold tracking-tight text-[#18203D]">
+                          Personal & Contact Information
+                        </h2>
+                        <p className="mt-0.5 text-xs text-[#5E6987]">
+                          Update your location and name to match your resume header.
+                        </p>
                       </div>
-                      <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-linear-to-r from-emerald-500 to-teal-400 transition-all duration-500"
-                          style={{ width: `${completeness}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Status Banner */}
-                  {statusMessage.text && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className={`mb-6 flex items-center gap-3 rounded-2xl p-4 border text-sm font-medium ${
-                        statusMessage.type === "success"
-                          ? "bg-emerald-50 border-emerald-200 text-emerald-800"
-                          : "bg-red-50 border-red-200 text-red-800"
-                      }`}
-                    >
-                      {statusMessage.type === "success" ? (
-                        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" />
-                      ) : (
-                        <AlertCircle className="h-5 w-5 shrink-0 text-red-600" />
-                      )}
-                      <span>{statusMessage.text}</span>
-                    </motion.div>
-                  )}
-
-                  {/* Form Grid */}
-                  <div className="grid gap-6 md:grid-cols-2">
-                    {/* Full Name */}
-                    <div>
-                      <label className="mb-2 block text-sm font-semibold text-gray-700">
-                        Full Name
-                      </label>
-                      <div className="relative">
-                        <User className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="e.g. Alex Johnson"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
-                        />
+                      {/* Completeness Bar */}
+                      <div className="w-full sm:w-44">
+                        <div className="flex justify-between text-xs font-semibold text-[#5E6987] mb-1">
+                          <span>Profile Filled</span>
+                          <span className="text-[#18203D] font-bold">
+                            {completeness}%
+                          </span>
+                        </div>
+                        <div className="h-1.5 w-full rounded-full bg-[#EDE8F5] border border-[#ADBBDA]/40 overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-[#3D52A0] transition-all duration-500"
+                            style={{ width: `${completeness}%` }}
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Username (Read Only) */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm font-semibold text-gray-700">
-                          Username
+                    {statusMessage.text && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        className={`mb-6 flex items-center gap-2.5 rounded-2xl p-3.5 border text-xs font-semibold ${
+                          statusMessage.type === "success"
+                            ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                            : "bg-rose-50 border-rose-200 text-rose-800"
+                        }`}
+                      >
+                        {statusMessage.type === "success" ? (
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+                        ) : (
+                          <AlertCircle className="h-4 w-4 shrink-0 text-rose-600" />
+                        )}
+                        <span>{statusMessage.text}</span>
+                      </motion.div>
+                    )}
+
+                    <div className="grid gap-5 md:grid-cols-2">
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                          Full Name
                         </label>
-                        <span className="flex items-center gap-1 text-xs text-gray-400 font-medium">
-                          <Lock className="h-3 w-3" />
-                          Cannot be changed
-                        </span>
+                        <div className="relative">
+                          <User className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8697C4]" />
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="e.g. Alex Morgan"
+                            className="w-full rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] py-2.5 pl-10 pr-4 text-xs font-medium text-[#18203D] placeholder-[#8697C4] outline-none transition focus:border-[#3D52A0] focus:ring-1 focus:ring-[#7091E6]/30"
+                          />
+                        </div>
                       </div>
-                      <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        disabled
-                        className="w-full cursor-not-allowed rounded-2xl border border-gray-200 bg-gray-50/80 px-4 py-3.5 text-gray-500 shadow-xs"
-                      />
-                    </div>
 
-                    {/* Email (Read Only with verified tag) */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm font-semibold text-gray-700">
-                          Email Address
-                        </label>
-                        <span className="flex items-center gap-1 text-xs text-emerald-600 font-semibold">
-                          <Check className="h-3 w-3" />
-                          Verified
-                        </span>
-                      </div>
-                      <div className="relative">
-                        <Mail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          disabled
-                          className="w-full cursor-not-allowed rounded-2xl border border-gray-200 bg-gray-50/80 py-3.5 pl-12 pr-4 text-gray-500 shadow-xs"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Phone Number (Read Only) */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-sm font-semibold text-gray-700">
-                          Phone Number
-                        </label>
-                        <span className="flex items-center gap-1 text-xs text-gray-400 font-medium">
-                          <Lock className="h-3 w-3" />
-                          Cannot be changed
-                        </span>
-                      </div>
-                      <div className="relative">
-                        <Phone className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input
-                          type="tel"
-                          name="phoneNo"
-                          value={formData.phoneNo}
-                          disabled
-                          className="w-full cursor-not-allowed rounded-2xl border border-gray-200 bg-gray-50/80 py-3.5 pl-12 pr-4 text-gray-500 shadow-xs"
-                        />
-                      </div>
-                    </div>
-
-                    {/* City */}
-                    <div>
-                      <label className="mb-2 block text-sm font-semibold text-gray-700">
-                        City
-                      </label>
-                      <div className="relative">
-                        <MapPin className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input
-                          type="text"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleChange}
-                          placeholder="e.g. San Francisco"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
-                        />
-                      </div>
-                    </div>
-
-                    {/* State */}
-                    <div>
-                      <label className="mb-2 block text-sm font-semibold text-gray-700">
-                        State / Province
-                      </label>
-                      <div className="relative">
-                        <Compass className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input
-                          type="text"
-                          name="state"
-                          value={formData.state}
-                          onChange={handleChange}
-                          placeholder="e.g. California"
-                          className="w-full rounded-2xl border border-gray-200 bg-white/80 py-3.5 pl-12 pr-4 text-gray-900 shadow-xs outline-none transition-all focus:ring-4 focus:ring-emerald-500/15"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Gender */}
-                    <div className="md:col-span-2">
-                      <label className="mb-2 block text-sm font-semibold text-gray-700">
-                        Gender
-                      </label>
-                      <div className="flex flex-wrap gap-4">
-                        {["Male", "Female"].map((option) => (
-                          <label
-                            key={option}
-                            className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-6 py-3 text-sm font-medium transition-all ${
-                              formData.gender === option
-                                ? "border-emerald-600 bg-emerald-50 text-emerald-800 shadow-xs ring-2 ring-emerald-600/20"
-                                : "border-gray-200 bg-white/80 text-gray-700 hover:border-gray-300"
-                            }`}
-                          >
-                            <input
-                              type="radio"
-                              name="gender"
-                              value={option}
-                              checked={formData.gender === option}
-                              onChange={handleChange}
-                              className="h-4 w-4 text-emerald-600 focus:ring-emerald-500"
-                            />
-                            {option}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                            Username
                           </label>
-                        ))}
+                          <span className="flex items-center gap-1 text-[10px] text-[#8697C4] font-medium">
+                            <Lock className="h-2.5 w-2.5" />
+                            Permanent
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          name="username"
+                          value={formData.username}
+                          disabled
+                          className="w-full cursor-not-allowed rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 px-4 py-2.5 text-xs text-[#8697C4]"
+                        />
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                            Email Address
+                          </label>
+                          <span className="flex items-center gap-1 text-[10px] text-emerald-600 font-semibold">
+                            <Check className="h-3 w-3" />
+                            Verified
+                          </span>
+                        </div>
+                        <div className="relative">
+                          <Mail className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8697C4]" />
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            disabled
+                            className="w-full cursor-not-allowed rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 py-2.5 pl-10 pr-4 text-xs text-[#8697C4]"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                            Phone Number
+                          </label>
+                          <span className="flex items-center gap-1 text-[10px] text-[#8697C4] font-medium">
+                            <Lock className="h-2.5 w-2.5" />
+                            Locked
+                          </span>
+                        </div>
+                        <div className="relative">
+                          <Phone className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8697C4]" />
+                          <input
+                            type="tel"
+                            name="phoneNo"
+                            value={formData.phoneNo}
+                            disabled
+                            className="w-full cursor-not-allowed rounded-2xl border border-[#ADBBDA]/40 bg-[#EDE8F5]/60 py-2.5 pl-10 pr-4 text-xs text-[#8697C4]"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                          City
+                        </label>
+                        <div className="relative">
+                          <MapPin className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8697C4]" />
+                          <input
+                            type="text"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            placeholder="e.g. San Francisco"
+                            className="w-full rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] py-2.5 pl-10 pr-4 text-xs font-medium text-[#18203D] placeholder-[#8697C4] outline-none transition focus:border-[#3D52A0] focus:ring-1 focus:ring-[#7091E6]/30"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                          State / Region
+                        </label>
+                        <div className="relative">
+                          <Compass className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8697C4]" />
+                          <input
+                            type="text"
+                            name="state"
+                            value={formData.state}
+                            onChange={handleChange}
+                            placeholder="e.g. California"
+                            className="w-full rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] py-2.5 pl-10 pr-4 text-xs font-medium text-[#18203D] placeholder-[#8697C4] outline-none transition focus:border-[#3D52A0] focus:ring-1 focus:ring-[#7091E6]/30"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-2">
+                        <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[#5E6987]">
+                          Gender
+                        </label>
+                        <div className="flex flex-wrap gap-2.5">
+                          {["Male", "Female"].map((option) => (
+                            <label
+                              key={option}
+                              className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
+                                formData.gender === option
+                                  ? "border-[#3D52A0] bg-[#EDE8F5] text-[#3D52A0]"
+                                  : "border-[#ADBBDA]/60 bg-[#F8F6FC] text-[#5E6987] hover:border-[#3D52A0]/40"
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="gender"
+                                value={option}
+                                checked={formData.gender === option}
+                                onChange={handleChange}
+                                className="h-3 w-3 accent-[#3D52A0]"
+                              />
+                              {option}
+                            </label>
+                          ))}
+                        </div>
                       </div>
                     </div>
+
+                    <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#ADBBDA]/50 pt-5">
+                      <button
+                        type="button"
+                        onClick={handleReset}
+                        disabled={isSaving}
+                        className="ghost-btn cursor-pointer flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-semibold disabled:opacity-50"
+                      >
+                        <RotateCcw className="h-3.5 w-3.5" />
+                        <span>Discard Changes</span>
+                      </button>
+
+                      <button
+                        type="submit"
+                        disabled={isSaving}
+                        className="pearl-btn cursor-pointer flex items-center gap-1.5 rounded-full px-7 py-2.5 text-xs font-bold disabled:opacity-50"
+                      >
+                        {isSaving ? (
+                          <>
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                            <span>Saving Changes...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Save className="h-3.5 w-3.5" />
+                            <span>Save Profile</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
+                </form>
+              </motion.div>
+            )}
 
-                  {/* Form Footer Action Buttons */}
-                  <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-6">
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      disabled={isSaving}
-                      className="cursor-pointer flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-gray-600 shadow-xs transition-colors hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50"
-                    >
-                      <RotateCcw className="h-4 w-4" />
-                      Discard Changes
-                    </button>
-
-                    <button
-                      type="submit"
-                      disabled={isSaving}
-                      className="cursor-pointer flex items-center gap-2 rounded-2xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-emerald-600/30 disabled:opacity-70"
-                    >
-                      {isSaving ? (
-                        <>
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Saving changes...
-                        </>
-                      ) : (
-                        <>
-                          <Save className="h-4 w-4" />
-                          Save Profile
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </motion.div>
-          )}
-
-          {activeTab === "security" && (
-            <motion.div
-              key="security-tab"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="space-y-6"
-            >
-              <div className="rounded-3xl border border-gray-200/70 bg-white/75 p-6 sm:p-10 shadow-xl backdrop-blur-xl">
-                <div className="border-b border-gray-100 pb-6 mb-8">
-                  <h2 className="text-xl font-bold tracking-tight text-gray-900">
-                    Security & Account Preferences
+            {activeTab === "security" && (
+              <motion.div
+                key="security-tab"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="pro-card rounded-3xl p-6 sm:p-8"
+              >
+                <div className="border-b border-[#ADBBDA]/50 pb-5 mb-6">
+                  <h2 className="text-lg font-bold tracking-tight text-[#18203D]">
+                    Security & Authentication Controls
                   </h2>
-                  <p className="mt-1 text-sm text-gray-500">
-                    Manage session authentication and privacy controls.
+                  <p className="mt-0.5 text-xs text-[#5E6987]">
+                    Cryptographic hash validation and session credential management.
                   </p>
                 </div>
 
-                <div className="space-y-6">
-                  {/* Account Protection Card */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-gray-200/60 bg-white/80 p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
-                        <Lock className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">
-                          Password & Authentication
-                        </h3>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Your account password is encrypted using modern bcrypt
-                          hashing with 10 salt rounds.
-                        </p>
-                      </div>
+                <div className="rounded-2xl border border-[#ADBBDA]/60 bg-[#F8F6FC] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-start gap-3.5">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#EDE8F5] text-[#3D52A0] border border-[#ADBBDA]/50">
+                      <Lock className="h-4 w-4" />
                     </div>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
-                      Protected
-                    </span>
+                    <div>
+                      <h3 className="font-bold text-xs text-[#18203D]">
+                        Bcrypt Cryptographic Password Hashing
+                      </h3>
+                      <p className="text-[11px] text-[#5E6987] mt-0.5 leading-relaxed">
+                        Account credentials are salted and hashed with 10 rounds of bcrypt before persistent database commit.
+                      </p>
+                    </div>
                   </div>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                    Active & Protected
+                  </span>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+      </div>
     </div>
   );
 };

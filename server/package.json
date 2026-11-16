@@ -22,7 +22,9 @@
   "dependencies": {
     "@google/genai": "^2.22.0",
     "cors": "^2.8.6",
+    "express-rate-limit": "^8.7.4",
     "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.13.0",
     "multer": "^2.4.0",
     "pdf-parse": "^2.4.5",
     "razorpay": "^2.9.8",

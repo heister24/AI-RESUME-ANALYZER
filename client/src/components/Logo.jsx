@@ -1,62 +1,53 @@
 import { useId } from "react";
 
 /**
- * Modern vector Logo component for ResumeLens
- *
- * @param {Object} props
- * @param {'full'|'icon'|'stacked'|'wordmark'} [props.variant='full'] - Layout variant
- * @param {'xs'|'sm'|'md'|'lg'|'xl'|'2xl'} [props.size='md'] - Sizing scale
- * @param {'light'|'dark'|'auto'} [props.theme='light'] - Theme for typography
- * @param {boolean} [props.showBadge=true] - Whether to render the 'AI' pill badge
- * @param {string} [props.badgeText='AI'] - Text inside the pill badge
- * @param {boolean} [props.animated=true] - Whether to apply interactive micro-animations
- * @param {string} [props.className=''] - Additional container classes
+ * Minimalist Brand Mark for ResumeLens
+ * Foundations color palette (Shopify Editions Winter '24 aesthetic).
  */
 const Logo = ({
   variant = "full",
   size = "md",
-  theme = "light",
+  theme = "dark",
   showBadge = true,
-  badgeText = "AI",
+  badgeText = "ATS",
   animated = true,
   className = "",
 }) => {
   const uid = useId().replace(/:/g, "");
 
-  // Size dimensions for the icon emblem
   const sizeMap = {
     xs: {
-      icon: 26,
+      icon: 24,
       text: "text-base",
       badge: "text-[9px] px-1.5 py-0.5",
       gap: "gap-2",
     },
     sm: {
-      icon: 32,
+      icon: 28,
       text: "text-lg",
       badge: "text-[10px] px-1.5 py-0.5",
       gap: "gap-2.5",
     },
     md: {
-      icon: 40,
+      icon: 32,
       text: "text-xl",
-      badge: "text-[11px] px-2 py-0.5",
-      gap: "gap-3",
+      badge: "text-[10px] px-2 py-0.5",
+      gap: "gap-2.5",
     },
     lg: {
-      icon: 48,
+      icon: 40,
       text: "text-2xl",
       badge: "text-xs px-2.5 py-0.5",
-      gap: "gap-3.5",
+      gap: "gap-3",
     },
     xl: {
-      icon: 60,
+      icon: 48,
       text: "text-3xl",
       badge: "text-xs px-3 py-1",
-      gap: "gap-4",
+      gap: "gap-3.5",
     },
     "2xl": {
-      icon: 76,
+      icon: 56,
       text: "text-4xl",
       badge: "text-sm px-3.5 py-1",
       gap: "gap-4",
@@ -66,197 +57,56 @@ const Logo = ({
   const config = sizeMap[size] || sizeMap.md;
   const iconPx = config.icon;
 
-  const textColorClass =
-    theme === "dark"
-      ? "text-white"
-      : theme === "auto"
-        ? "text-current"
-        : "text-gray-900";
-
-  // The high-detail SVG Emblem
+  // Clean geometric mark (Foundations Palette)
   const IconMark = (
     <div
       className={`relative flex items-center justify-center shrink-0 ${
-        animated
-          ? "transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-1"
-          : ""
+        animated ? "transition-transform duration-200 group-hover:scale-105" : ""
       }`}
       style={{ width: iconPx, height: iconPx }}
     >
       <svg
-        viewBox="0 0 48 48"
+        viewBox="0 0 32 32"
         width={iconPx}
         height={iconPx}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-sm"
         aria-hidden="true"
       >
-        <defs>
-          {/* Background Squircle Gradient */}
-          <linearGradient
-            id={`rl-bg-${uid}`}
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#047857" />
-            <stop offset="55%" stopColor="#065f46" />
-            <stop offset="100%" stopColor="#0f172a" />
-          </linearGradient>
-
-          {/* Neon Lens & Handle Gradient */}
-          <linearGradient
-            id={`rl-neon-${uid}`}
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#34D399" />
-            <stop offset="60%" stopColor="#10B981" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-
-          {/* Inner Lens Radial Glow */}
-          <radialGradient id={`rl-glow-${uid}`} cx="45%" cy="45%" r="55%">
-            <stop offset="0%" stopColor="#34D399" stopOpacity="0.38" />
-            <stop offset="65%" stopColor="#06B6D4" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#06B6D4" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Squircle Glass Border */}
-          <linearGradient
-            id={`rl-border-${uid}`}
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#6EE7B7" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.25" />
-          </linearGradient>
-        </defs>
-
-        {/* Squircle Base */}
         <rect
-          x="2"
-          y="2"
-          width="44"
-          height="44"
-          rx="12.5"
-          fill={`url(#rl-bg-${uid})`}
+          width="32"
+          height="32"
+          rx="9"
+          fill="#3D52A0"
         />
         <rect
-          x="2.5"
-          y="2.5"
-          width="43"
-          height="43"
-          rx="12"
-          stroke={`url(#rl-border-${uid})`}
-          strokeWidth="1"
-        />
-
-        {/* Background Resume Document Silhouette */}
-        <path
-          d="M12 12C12 10.8954 12.8954 10 14 10H25L32 17V34C32 35.1046 31.1046 36 30 36H14C12.8954 36 12 35.1046 12 34V12Z"
-          fill="#082b21"
-          stroke="#10B981"
-          strokeWidth="1.2"
+          x="0.5"
+          y="0.5"
+          width="31"
+          height="31"
+          rx="8.5"
+          stroke="#ADBBDA"
           strokeOpacity="0.5"
         />
-
-        {/* Document Folded Corner */}
+        {/* Three precision waves in Foundations palette */}
         <path
-          d="M25 10V16C25 16.5523 25.4477 17 26 17H32"
-          stroke="#10B981"
-          strokeWidth="1.2"
+          d="M8 11.5C10.5 9.5 13.5 9.5 16 11.5C18.5 13.5 21.5 13.5 24 11.5"
+          stroke="#EDE8F5"
+          strokeWidth="1.75"
           strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeOpacity="0.65"
         />
-
-        {/* Document Experience & Skills Lines */}
-        <line
-          x1="16"
-          y1="18"
-          x2="21"
-          y2="18"
-          stroke="#34D399"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeOpacity="0.85"
-        />
-        <line
-          x1="16"
-          y1="22"
-          x2="22"
-          y2="22"
-          stroke="#6EE7B7"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeOpacity="0.55"
-        />
-        <line
-          x1="16"
-          y1="26"
-          x2="19"
-          y2="26"
-          stroke="#6EE7B7"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeOpacity="0.55"
-        />
-
-        {/* Magnifying Optical Lens Glass */}
-        <circle cx="27" cy="25" r="9" fill={`url(#rl-glow-${uid})`} />
-
-        {/* Lens Glass Reflection Highlight Arc */}
         <path
-          d="M22 21C23.3 19.5 25.2 18.5 27.2 18.5"
-          stroke="#ffffff"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          strokeOpacity="0.8"
-        />
-
-        {/* Optical Lens Rim */}
-        <circle
-          cx="27"
-          cy="25"
-          r="9"
-          stroke={`url(#rl-neon-${uid})`}
-          strokeWidth="2.2"
-        />
-
-        {/* Lens Scanner Handle */}
-        <path
-          d="M33.5 31.5L38.5 36.5"
-          stroke={`url(#rl-neon-${uid})`}
-          strokeWidth="2.5"
+          d="M8 16C10.5 14 13.5 14 16 16C18.5 18 21.5 18 24 16"
+          stroke="#7091E6"
+          strokeWidth="1.75"
           strokeLinecap="round"
         />
-
-        {/* Focused Target Reticle inside Lens */}
-        <circle cx="27" cy="25" r="1.8" fill="#38BDF8" />
-        <circle
-          cx="27"
-          cy="25"
-          r="4.5"
-          stroke="#34D399"
-          strokeWidth="0.8"
-          strokeDasharray="2 1.5"
-          strokeOpacity="0.85"
-        />
-
-        {/* AI Sparkle Star (4-point brilliance) */}
         <path
-          d="M36 10C36 12 37.5 13.5 39.5 13.5C37.5 13.5 36 15 36 17C36 15 34.5 13.5 32.5 13.5C34.5 13.5 36 12 36 10Z"
-          fill="#34D399"
-          className={animated ? "animate-pulse" : ""}
+          d="M8 20.5C10.5 18.5 13.5 18.5 16 20.5C18.5 22.5 21.5 22.5 24 20.5"
+          stroke="#ADBBDA"
+          strokeWidth="1.75"
+          strokeLinecap="round"
         />
-        <circle cx="36" cy="13.5" r="0.8" fill="#ffffff" />
       </svg>
     </div>
   );
@@ -265,17 +115,15 @@ const Logo = ({
   const Wordmark = (
     <div className="flex items-center gap-2">
       <span
-        className={`font-extrabold tracking-tight select-none ${config.text} ${textColorClass}`}
+        className={`font-semibold tracking-[-0.03em] select-none text-[#18203D] ${config.text}`}
       >
         Resume
-        <span className="bg-linear-to-r from-emerald-500 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-          Lens
-        </span>
+        <span className="font-extrabold text-[#3D52A0]">Lens</span>
       </span>
 
       {showBadge && (
         <span
-          className={`inline-flex items-center font-bold uppercase tracking-wider rounded-full bg-linear-to-r from-emerald-500 to-teal-500 text-white shadow-xs select-none ${config.badge}`}
+          className={`inline-flex items-center font-mono font-bold tracking-widest uppercase rounded-full bg-[#EDE8F5] border border-[#ADBBDA]/60 text-[#3D52A0] select-none ${config.badge}`}
         >
           {badgeText}
         </span>
@@ -308,7 +156,6 @@ const Logo = ({
     );
   }
 
-  // Default 'full' variant (horizontal row)
   return (
     <div className={`inline-flex items-center ${config.gap} ${className}`}>
       {IconMark}

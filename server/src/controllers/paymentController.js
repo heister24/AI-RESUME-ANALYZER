@@ -126,4 +126,73 @@ const verifyPayment = async (req, res) => {
   }
 };
 
-export { createOrder, verifyPayment };
+/**
+ * Server-Side Razorpay Webhook Handler
+ * Reconciles payments asynchronously if candidate closes tab before redirect.
+ * Fully idempotent to prevent duplicate credit additions.
+ */
+const handleRazorpayWebhook = async (req, res) => {
+  try {
+    const webhookSecret =
+      process.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_KEY_SECRET;
+    const webhookSignature = req.headers["x-razorpay-signature"];
+
+    if (!webhookSignature || !webhookSecret) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing signature or webhook secret configuration",
+      });
+    }
+
+    const shasum = crypto.createHmac("sha256", webhookSecret);
+    shasum.update(JSON.stringify(req.body));
+    const digest = shasum.digest("hex");
+
+    if (digest !== webhookSignature) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid webhook signature" });
+    }
+
+    const event = req.body.event;
+    if (event === "payment.captured" || event === "order.paid") {
+      const paymentEntity = req.body.payload?.payment?.entity;
+      const orderId = paymentEntity?.order_id;
+      const paymentId = paymentEntity?.id;
+
+      if (orderId) {
+        const paymentRecord = await PaymentModel.findOne({
+          razorpayOrderId: orderId,
+        });
+
+        // Ensure idempotency: only credit if not already processed by client verify
+        if (paymentRecord && paymentRecord.status !== "paid") {
+          paymentRecord.status = "paid";
+          if (paymentId) paymentRecord.razorpayPaymentId = paymentId;
+          await paymentRecord.save();
+
+          const plans = {
+            basic: { credits: 5 },
+            pro: { credits: 25 },
+            super: { credits: 50 },
+          };
+          const selected = plans[paymentRecord.plan];
+          if (selected) {
+            await UserModel.findByIdAndUpdate(paymentRecord.user, {
+              $inc: { tokens: selected.credits },
+            });
+          }
+        }
+      }
+    }
+
+    return res.status(200).json({ status: "ok" });
+  } catch (error) {
+    console.error("Razorpay webhook reconciliation error:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Webhook handler failed" });
+  }
+};
+
+export { createOrder, verifyPayment, handleRazorpayWebhook };

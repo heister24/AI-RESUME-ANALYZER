@@ -6,15 +6,36 @@ import {
   getUserReports,
   getReportById,
   deleteReport,
+  handleRewriteBullet,
+  handleGenerateCoverLetter,
 } from "../controllers/interviewController.js";
+import {
+  aiReportLimiter,
+  bulletRewriteLimiter,
+} from "../middlewares/rateLimitMiddleware.js";
 
 const interviewRouter = express.Router();
 
 interviewRouter.post(
   "/generate",
   authMiddleware,
+  aiReportLimiter,
   upload.single("resume"),
   generateReport,
+);
+
+interviewRouter.post(
+  "/rewrite-bullet",
+  authMiddleware,
+  bulletRewriteLimiter,
+  handleRewriteBullet,
+);
+
+interviewRouter.post(
+  "/generate-cover-letter",
+  authMiddleware,
+  bulletRewriteLimiter,
+  handleGenerateCoverLetter,
 );
 
 interviewRouter.get("/reports", authMiddleware, getUserReports);
