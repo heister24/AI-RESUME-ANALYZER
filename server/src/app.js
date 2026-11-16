@@ -12,7 +12,21 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+      if (!origin) return callback(null, true);
+      const clientUrl = (process.env.CLIENT_URL || "").trim().replace(/\/+$/, "");
+      if (
+        !clientUrl ||
+        origin === clientUrl ||
+        origin === "http://localhost:5173" ||
+        origin === "http://localhost:3000" ||
+        origin.endsWith(".vercel.app")
+      ) {
+        return callback(null, origin);
+      }
+      return callback(null, origin);
+    },
     credentials: true,
   }),
 );
