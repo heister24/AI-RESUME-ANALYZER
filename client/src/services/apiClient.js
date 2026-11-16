@@ -17,4 +17,20 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Automatically attach Bearer token to all requests for reliable cross-domain authentication
+api.interceptors.request.use(
+  (config) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (e) {
+      // Ignore in non-browser environments
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
 export default api;

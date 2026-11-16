@@ -50,6 +50,7 @@ const userRegister = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
+      token,
       user: userResponse,
     });
   } catch (error) {
@@ -105,6 +106,7 @@ const userlogin = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User logged in successfully",
+      token,
       user: userResponse,
     });
   } catch (error) {

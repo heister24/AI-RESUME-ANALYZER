@@ -1,14 +1,6 @@
 import api from "./apiClient.js";
 
 const register = async (name, username, phoneNo, email, password) => {
-  // const payload = {
-  //   name,
-  //   username,
-  //   phoneNo,
-  //   email,
-  //   password,
-  // };
-
   const res = await api.post("/auth/register", {
     name,
     username,
@@ -16,11 +8,21 @@ const register = async (name, username, phoneNo, email, password) => {
     phoneNo,
     password,
   });
+  if (res.data?.token) {
+    try {
+      localStorage.setItem("token", res.data.token);
+    } catch (e) {}
+  }
   return res.data;
 };
 
 const login = async (email, password) => {
   const res = await api.post("/auth/login", { email, password });
+  if (res.data?.token) {
+    try {
+      localStorage.setItem("token", res.data.token);
+    } catch (e) {}
+  }
   return res.data;
 };
 
@@ -29,12 +31,20 @@ const getMe = async () => {
     const res = await api.get("/auth/getme");
     return res.data;
   } catch (error) {
-    // console.log("Not authenticated or getMe failed", error?.message);
+    // If 401 or invalid token, clean up stored token
+    if (error?.response?.status === 401) {
+      try {
+        localStorage.removeItem("token");
+      } catch (e) {}
+    }
     return null;
   }
 };
 
 const logout = async () => {
+  try {
+    localStorage.removeItem("token");
+  } catch (e) {}
   const res = await api.get("/auth/logout");
   return res.data;
 };
