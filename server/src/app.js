@@ -8,6 +8,9 @@ import { apiLimiter } from "./middlewares/rateLimitMiddleware.js";
 
 const app = express();
 
+// Trust reverse proxy (Render, Heroku, Cloudflare) for accurate IP resolution via X-Forwarded-For
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
