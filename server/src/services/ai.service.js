@@ -9,7 +9,37 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-const model_name = "gemini-3.5-flash-lite";
+const candidateModels = [
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
+];
+
+const generateWithFallback = async ({ prompt, schema }) => {
+  let lastError;
+  for (const model of candidateModels) {
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          responseMimeType: "application/json",
+          responseJsonSchema: z.toJSONSchema(schema),
+        },
+      });
+      if (response && response.text) {
+        return schema.parse(JSON.parse(response.text));
+      }
+    } catch (err) {
+      console.warn(
+        `[AI Service] Model ${model} failed, falling back:`,
+        err.message,
+      );
+      lastError = err;
+    }
+  }
+  throw lastError;
+};
 
 const interviewReportSchema = z.object({
   matchScore: z
@@ -141,16 +171,10 @@ const generateInterviewReport = async (
     4. Categorize skills into a 4-dimensional skillsHeatmap (hardSkills, cloudAndDevOps, methodologies, softSkills) with category percentage scores (0-100) and matched vs missing skill lists.
     5. Construct a structured 7-day preparation roadmap plan.`;
 
-  const response = await ai.models.generateContent({
-    model: model_name,
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseJsonSchema: z.toJSONSchema(interviewReportSchema),
-    },
+  return await generateWithFallback({
+    prompt,
+    schema: interviewReportSchema,
   });
-
-  return interviewReportSchema.parse(JSON.parse(response.text));
 };
 
 const bulletRewriteSchema = z.object({
@@ -197,16 +221,10 @@ Requirements:
    - "ATS Keyword Maximizer": Emphasize industry standard tools, frameworks, CI/CD, testing, or enterprise architecture keywords.
 3. Every bullet must start with an active, powerful past-tense action verb (e.g., "Architected", "Engineered", "Spearheaded", "Revamped").`;
 
-  const response = await ai.models.generateContent({
-    model: model_name,
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseJsonSchema: z.toJSONSchema(bulletRewriteSchema),
-    },
+  return await generateWithFallback({
+    prompt,
+    schema: bulletRewriteSchema,
   });
-
-  return bulletRewriteSchema.parse(JSON.parse(response.text));
 };
 
 const coverLetterSchema = z.object({
@@ -261,16 +279,10 @@ Guidelines:
 3. Bridge candidate skill competencies directly to the company key requirements.
 4. Keep the tone executive, confident, and authentic.`;
 
-  const response = await ai.models.generateContent({
-    model: model_name,
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseJsonSchema: z.toJSONSchema(coverLetterSchema),
-    },
+  return await generateWithFallback({
+    prompt,
+    schema: coverLetterSchema,
   });
-
-  return coverLetterSchema.parse(JSON.parse(response.text));
 };
 
 export { generateInterviewReport };
